@@ -1,4 +1,4 @@
-ChmSee is an HTML Help(CHM) viewer for Unix/Linux. It is based on CHMLIB
+﻿ChmSee is an HTML Help(CHM) viewer for Unix/Linux. It is based on CHMLIB
 and use GTK+ as frontend toolkit. Because of using WebKit as HTML
 rendering engine, ChmSee can support rich features of modern HTML
 page, such as CSS and JavaScript.
@@ -25,7 +25,7 @@ To compile ChmSee from source you need following packages:
 Installation
 ============
 
-```
+```shell
 git clone https://github.com/Xianguang-Zhou/chmsee.git
 cd chmsee
 mkdir build
@@ -38,7 +38,7 @@ sudo make install
 Dependencies installation for Ubuntu 16.04
 ==========================================
 
-```
+```shell
 sudo apt-get install g++-5 cmake intltool libgtk2.0-dev libglade2-dev \
     libwebkitgtk-dev libchm-dev libgcrypt20-dev libxml2-dev libxapian-dev \
     libboost-filesystem-dev
@@ -47,7 +47,7 @@ sudo apt-get install g++-5 cmake intltool libgtk2.0-dev libglade2-dev \
 Installation for Ubuntu 16.04
 =============================
 
-```
+```shell
 git clone https://github.com/Xianguang-Zhou/chmsee.git
 mkdir chmsee_release_build
 cd chmsee_release_build
@@ -59,7 +59,7 @@ sudo make install
 Development for Eclipse 3.7 and Ubuntu 16.04
 ============================================
 
-```
+```shell
 git clone https://github.com/Xianguang-Zhou/chmsee.git
 mkdir chmsee_eclipse_build
 cd chmsee_eclipse_build
