@@ -52,7 +52,7 @@ struct _SearchListClass {
 };
 
 GType searchlist_get_type(void);
-GtkWidget * searchlist_new(const gchar * book_dir, const gchar * home_dir);
+GtkWidget * searchlist_new(const gchar * book_dir, const gchar * book_index_dir);
 
 G_END_DECLS
 

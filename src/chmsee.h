@@ -1,5 +1,6 @@
 /*
  *  Copyright (c) 2006           Ji YongGang <jungle@soforge-studio.com>
+ *  Copyright (c) 2017           Xianguang Zhou <xianguang.zhou@outlook.com>
  *
  *  ChmSee is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -75,6 +76,7 @@ ChmSee * chmsee_new(const gchar* fname);
 int chmsee_get_hpaned_position(ChmSee* self);
 void chmsee_set_hpaned_position(ChmSee* self, int hpaned_position);
 const gchar* chmsee_get_cache_dir(ChmSee* self);
+const gchar* chmsee_get_index_dir(ChmSee* self);
 
 const gchar* chmsee_get_variable_font(ChmSee* self);
 void chmsee_set_variable_font(ChmSee* self, const gchar* font_name);

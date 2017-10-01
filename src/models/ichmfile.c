@@ -1,5 +1,6 @@
 /*
  *  Copyright (C) 2009 LI Daobing <lidaobing@gmail.com>
+ *  Copyright (c) 2017 Xianguang Zhou <xianguang.zhou@outlook.com>
  *
  *  ChmSee is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -55,6 +56,12 @@ const gchar* chmsee_ichmfile_get_dir(ChmseeIchmfile* self)
 {
   g_return_val_if_fail(CHMSEE_IS_ICHMFILE(self), NULL);
   return CHMSEE_ICHMFILE_GET_INTERFACE(self)->get_dir(self);
+}
+
+const gchar* chmsee_ichmfile_get_index_dir(ChmseeIchmfile* self)
+{
+  g_return_val_if_fail(CHMSEE_IS_ICHMFILE(self), NULL);
+  return CHMSEE_ICHMFILE_GET_INTERFACE(self)->get_index_dir(self);
 }
 
 const gchar* chmsee_ichmfile_get_home(ChmseeIchmfile* self)

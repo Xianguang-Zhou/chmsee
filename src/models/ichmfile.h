@@ -1,5 +1,6 @@
 /*
  *  Copyright (C) 2009 LI Daobing <lidaobing@gmail.com>
+ *  Copyright (c) 2017 Xianguang Zhou <xianguang.zhou@outlook.com>
  *
  *  ChmSee is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,6 +39,7 @@ struct _ChmseeIchmfileInterface
   GTypeInterface parent_iface;
 
   const gchar* (*get_dir) (ChmseeIchmfile* self);
+  const gchar* (*get_index_dir) (ChmseeIchmfile* self);
   const gchar* (*get_home) (ChmseeIchmfile* self);
   const gchar* (*get_title) (ChmseeIchmfile* self);
   const gchar* (*get_variable_font) (ChmseeIchmfile* self);
@@ -51,6 +53,7 @@ struct _ChmseeIchmfileInterface
 
 GType chmsee_ichmfile_get_type(void);
 const gchar* chmsee_ichmfile_get_dir(ChmseeIchmfile* self);
+const gchar* chmsee_ichmfile_get_index_dir(ChmseeIchmfile* self);
 const gchar* chmsee_ichmfile_get_home(ChmseeIchmfile* self);
 Hhc* chmsee_ichmfile_get_link_tree(ChmseeIchmfile* self);
 Bookmarks* chmsee_ichmfile_get_bookmarks_list(ChmseeIchmfile* self);

@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2006 Ji YongGang <jungle@soforge-studio.com>
  *  Copyright (C) 2009 LI Daobing <lidaobing@gmail.com>
+ *  Copyright (c) 2017 Xianguang Zhou <xianguang.zhou@outlook.com>
  *
  *  ChmSee is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -94,6 +95,8 @@ chmfile_init(ChmFile *chmfile)
 {
   chmfile->filename = NULL;
   chmfile->home = NULL;
+  chmfile->dir = NULL;
+  chmfile->index_dir = NULL;
   chmfile->hhc = NULL;
   chmfile->hhk = NULL;
   chmfile->title = NULL;
@@ -116,6 +119,8 @@ chmfile_finalize(GObject *object)
   g_free(chmfile->hhc);
   g_free(chmfile->hhk);
   g_free(chmfile->home);
+  g_free(chmfile->dir);
+  g_free(chmfile->index_dir);
   g_free(chmfile->title);
   g_free(chmfile->variable_font);
   g_free(chmfile->fixed_font);
@@ -535,7 +540,7 @@ chmfile_new(const gchar *filename)
                                   "bookshelf",
                                   md5,
                                   NULL);
-  g_debug("book dir = %s", chmfile->dir);
+  g_debug("chmfile->dir = %s", chmfile->dir);
 
   /* If this chm file extracted before, load it's bookinfo */
   if (!g_file_test(chmfile->dir, G_FILE_TEST_IS_DIR)) {
@@ -552,6 +557,13 @@ chmfile_new(const gchar *filename)
   } else {
     load_fileinfo(chmfile);
   }
+
+  chmfile->index_dir = g_build_filename(g_getenv("HOME"),
+                                  ".chmsee",
+                                  "index",
+                                  md5,
+                                  NULL);
+  g_debug("chmfile->index_dir = %s", chmfile->index_dir);
 
   g_debug("chmfile->hhc = %s", chmfile->hhc);
   g_debug("chmfile->hhk = %s", chmfile->hhk);
@@ -692,6 +704,10 @@ static const gchar* chmfile_get_dir(ChmFile* self) {
   return self->dir;
 }
 
+static const gchar* chmfile_get_index_dir(ChmFile* self) {
+  return self->index_dir;
+}
+
 static const gchar* chmfile_get_home(ChmFile* self) {
   return self->home;
 }
@@ -728,6 +744,7 @@ static void chmfile_set_variable_font(ChmFile* self, const gchar* font) {
 static void chmsee_ichmfile_interface_init (ChmseeIchmfileInterface* iface)
 {
   iface->get_dir = chmfile_get_dir;
+  iface->get_index_dir = chmfile_get_index_dir;
   iface->get_home = chmfile_get_home;
   iface->get_title = chmfile_get_title;
   iface->get_fixed_font = chmfile_get_fixed_font;

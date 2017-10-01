@@ -44,7 +44,7 @@ struct _SearchListPrivate {
 	GtkWidget * cancel_button;
 
 	const gchar * book_dir;
-	const gchar * home_dir;
+	const gchar * book_index_dir;
 
 	std::string index_path;
 	gboolean index_thread_running;
@@ -193,13 +193,14 @@ static void searchlist_dispose(GObject* gobject) {
 	G_OBJECT_CLASS(searchlist_parent_class)->dispose(gobject);
 }
 
-GtkWidget * searchlist_new(const gchar * book_dir, const gchar * home_dir) {
+GtkWidget * searchlist_new(const gchar * book_dir,
+		const gchar * book_index_dir) {
 	SearchList * self;
 
 	self = SEARCHLIST(g_object_new(TYPE_SEARCHLIST, NULL));
 
 	selfp->book_dir = book_dir;
-	selfp->home_dir = home_dir;
+	selfp->book_index_dir = book_index_dir;
 
 	return GTK_WIDGET(self);
 }
@@ -264,8 +265,7 @@ static void searchlist_clear(SearchList * self) {
 	}
 
 	boost::filesystem::path book_index_dir_path(
-			std::string(selfp->home_dir) + std::string("/index/")
-					+ boost::filesystem::path(selfp->book_dir).filename().string());
+			std::string(selfp->book_index_dir));
 	boost::filesystem::remove_all(book_index_dir_path);
 }
 
@@ -433,8 +433,7 @@ static gpointer searchlist_index(gpointer data) {
 	searchlist_clear(self);
 
 	boost::filesystem::path book_index_dir_path(
-			std::string(selfp->home_dir) + std::string("/index/")
-					+ boost::filesystem::path(selfp->book_dir).filename().string());
+			std::string(selfp->book_index_dir));
 	boost::filesystem::create_directories(book_index_dir_path);
 
 	Xapian::WritableDatabase writeable_database(book_index_dir_path.string(),
@@ -444,8 +443,8 @@ static gpointer searchlist_index(gpointer data) {
 
 	boost::filesystem::path book_dir_path(selfp->book_dir);
 	for (boost::filesystem::recursive_directory_iterator file_iter(
-			book_dir_path), end_file_iter; selfp->index_thread_running && file_iter != end_file_iter;
-			file_iter++) {
+			book_dir_path), end_file_iter;
+	selfp->index_thread_running && file_iter != end_file_iter; file_iter++) {
 		if (file_iter->status().type() == boost::filesystem::regular_file) {
 			const boost::filesystem::path& file_path = file_iter->path();
 			std::string file_extension_name = boost::filesystem::extension(
@@ -495,8 +494,7 @@ static void searchlist_search(SearchList * self) {
 
 	if (!selfp->database) {
 		boost::filesystem::path book_index_dir_path(
-				std::string(selfp->home_dir) + std::string("/index/")
-						+ boost::filesystem::path(selfp->book_dir).filename().string());
+				std::string(selfp->book_index_dir));
 		if (!boost::filesystem::is_directory(book_index_dir_path)) {
 			GtkWidget * message_dialog =
 					gtk_message_dialog_new(NULL, GTK_DIALOG_MODAL,

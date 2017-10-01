@@ -82,6 +82,7 @@ struct _ChmSeePrivate {
 
     gchar           *home;
     gchar           *cache_dir;
+    gchar           *index_dir;
     gchar           *last_dir;
 };
 
@@ -201,6 +202,11 @@ chmsee_init(ChmSee* self)
 	if (!g_file_test(selfp->cache_dir, G_FILE_TEST_IS_DIR))
 		mkdir(selfp->cache_dir, 0777);
 
+	selfp->index_dir = g_build_filename(selfp->home, "index", NULL);
+
+	if (!g_file_test(selfp->index_dir, G_FILE_TEST_IS_DIR))
+		mkdir(selfp->index_dir, 0777);
+
 	selfp->lang = 0;
 	selfp->last_dir = g_strdup(g_get_home_dir());
 
@@ -255,6 +261,11 @@ chmsee_finalize(GObject *object)
 	if(selfp->cache_dir) {
 		g_free(selfp->cache_dir);
 		selfp->cache_dir = NULL;
+	}
+
+	if(selfp->index_dir) {
+		g_free(selfp->index_dir);
+		selfp->index_dir = NULL;
 	}
 
 	if(selfp->last_dir) {
@@ -1298,7 +1309,8 @@ display_book(ChmSee* self, ChmseeIchmfile *book)
 			self);
 
 	/* SearchList */
-	selfp->search_list = searchlist_new(chmsee_ichmfile_get_dir(selfp->book), selfp->home);
+	selfp->search_list = searchlist_new(chmsee_ichmfile_get_dir(selfp->book),
+			chmsee_ichmfile_get_index_dir(selfp->book));
 	gtk_notebook_append_page(GTK_NOTEBOOK (selfp->control_notebook),
 				selfp->search_list,
 				gtk_label_new (_("Search")));
@@ -1865,6 +1877,10 @@ static gboolean on_scroll_event(ChmSee* self, GdkEventScroll* event) {
 
 const gchar* chmsee_get_cache_dir(ChmSee* self) {
 	return selfp->cache_dir;
+}
+
+const gchar* chmsee_get_index_dir(ChmSee* self) {
+	return selfp->index_dir;
 }
 
 const gchar* chmsee_get_variable_font(ChmSee* self) {

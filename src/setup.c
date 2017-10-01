@@ -1,5 +1,6 @@
 /*
  *  Copyright (c) 2006		 Ji YongGang <jungle@soforge-studio.com>
+ *  Copyright (c) 2017       Xianguang Zhou <xianguang.zhou@outlook.com>
  *
  *  ChmSee is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -36,6 +37,7 @@
 #include "gecko_utils.h"
 
 static void on_cache_clear(GtkWidget *, ChmSee *);
+static void on_index_clear(GtkWidget *, ChmSee *);
 static void on_window_close(GtkButton *, ChmSee *);
 
 typedef struct
@@ -49,6 +51,13 @@ on_cache_clear(GtkWidget *widget, ChmSee *chmsee)
 {
 	command_delete_tmpdir(
 			chmsee_get_cache_dir(chmsee));
+}
+
+static void
+on_index_clear(GtkWidget *widget, ChmSee *chmsee)
+{
+	command_delete_tmpdir(
+			chmsee_get_index_dir(chmsee));
 }
 
 static void
@@ -109,6 +118,8 @@ setup_window_new(ChmSee *chmsee)
 	GtkWidget *setup_window;
 	GtkWidget *cache_entry;
 	GtkWidget *clear_button;
+	GtkWidget *index_entry;
+	GtkWidget *clear_index_button;
 	GtkWidget *variable_font_button;
 	GtkWidget *fixed_font_button;
 	GtkWidget *cmb_lang;
@@ -132,6 +143,16 @@ setup_window_new(ChmSee *chmsee)
 			 "clicked",
 			 G_CALLBACK (on_cache_clear),
 			 chmsee);
+
+	/* index directory */
+	index_entry = glade_xml_get_widget(glade, "index_dir_entry");
+	gtk_entry_set_text(GTK_ENTRY(index_entry), chmsee_get_index_dir(chmsee));
+
+	clear_index_button = glade_xml_get_widget(glade, "setup_clear_index");
+	g_signal_connect(G_OBJECT (clear_index_button),
+				 "clicked",
+				 G_CALLBACK (on_index_clear),
+				 chmsee);
 
 	/* font setting */
 	variable_font_button = glade_xml_get_widget(glade, "variable_fontbtn");

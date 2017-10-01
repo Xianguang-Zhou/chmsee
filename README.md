@@ -30,7 +30,7 @@ git clone https://github.com/Xianguang-Zhou/chmsee.git
 cd chmsee
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 make
 sudo make install
 ```

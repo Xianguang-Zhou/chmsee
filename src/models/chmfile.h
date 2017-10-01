@@ -1,6 +1,7 @@
 /*
  *  Copyright (C) 2006 Ji YongGang <jungle@soforge-studio.com>
  *  Copyright (C) 2009 LI Daobing <lidaobing@gmail.com>
+ *  Copyright (c) 2017 Xianguang Zhou <xianguang.zhou@outlook.com>
  *
  *  ChmSee is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -49,6 +50,7 @@ struct _ChmFile
 
         gchar          *filename;
         gchar          *dir;
+        gchar          *index_dir;
         gchar          *home;
         gchar          *hhc;
         gchar          *hhk;
