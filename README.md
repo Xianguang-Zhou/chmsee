@@ -24,7 +24,7 @@ To compile ChmSee from source you need following packages:
 Installation
 ============
 
-```shell
+```sh
 git clone https://github.com/Xianguang-Zhou/chmsee.git
 cd chmsee
 mkdir build
@@ -40,7 +40,7 @@ Dependencies installation for Ubuntu 16.04
 Note: If you are using Ubuntu 16.04, then you need to install g++ compiler 
 with a version equal to or higher than "5.0.0".
 
-```shell
+```sh
 sudo apt-get install g++-5 cmake intltool libgtk2.0-dev libglade2-dev \
     libwebkitgtk-dev libchm-dev libgcrypt20-dev libxml2-dev libxapian-dev \
     libboost-filesystem-dev
@@ -49,7 +49,7 @@ sudo apt-get install g++-5 cmake intltool libgtk2.0-dev libglade2-dev \
 Installation for Ubuntu 16.04
 =============================
 
-```shell
+```sh
 git clone https://github.com/Xianguang-Zhou/chmsee.git
 mkdir chmsee_release_build
 cd chmsee_release_build
@@ -61,7 +61,7 @@ sudo make install
 Development for Eclipse 3.7 and Ubuntu 16.04
 ============================================
 
-```shell
+```sh
 git clone https://github.com/Xianguang-Zhou/chmsee.git
 mkdir chmsee_eclipse_build
 cd chmsee_eclipse_build
