@@ -38,7 +38,7 @@ Dependencies installation for Ubuntu 16.04
 ==========================================
 
 Note: If you are using Ubuntu 16.04, then you need to install g++ compiler 
-with a version higher than "5.4.0".
+with a version equal to or higher than "5.0.0".
 
 ```shell
 sudo apt-get install g++-5 cmake intltool libgtk2.0-dev libglade2-dev \
