@@ -10,7 +10,6 @@ Dependencies
 ============
 
 To compile ChmSee from source you need following packages:
- * g++ >= 5.4.0
  * cmake >= 2.6
  * intltool
  * libgtk2.0-dev >= 2.8
@@ -37,6 +36,9 @@ sudo make install
 
 Dependencies installation for Ubuntu 16.04
 ==========================================
+
+Note: If you are using Ubuntu 16.04, then you need to install g++ compiler 
+with a version higher than "5.4.0".
 
 ```shell
 sudo apt-get install g++-5 cmake intltool libgtk2.0-dev libglade2-dev \
