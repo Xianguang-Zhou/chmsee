@@ -515,6 +515,7 @@ static void searchlist_search(SearchList * self) {
 	Xapian::QueryParser query_parser;
 	query_parser.set_stemmer(Xapian::Stem());
 	query_parser.set_stemming_strategy(Xapian::QueryParser::STEM_SOME);
+	query_parser.set_default_op(Xapian::Query::OP_AND);
 	Xapian::Query query = query_parser.parse_query(query_string);
 
 	Xapian::Enquire enquire(*selfp->database);
