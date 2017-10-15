@@ -6,8 +6,7 @@ page, such as CSS and JavaScript.
 Homepage: https://github.com/Xianguang-Zhou/chmsee
 
 
-Dependencies
-============
+# Dependencies
 
 To compile ChmSee from source you need following packages:
  * cmake >= 2.6
@@ -21,24 +20,10 @@ To compile ChmSee from source you need following packages:
  * libxapian-dev >= 1.2.12
  * libboost-filesystem-dev >= 1.49.0
 
-Installation
-============
-
-```sh
-git clone https://github.com/Xianguang-Zhou/chmsee.git
-cd chmsee
-mkdir build
-cd build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make
-sudo make install
-```
-
-Dependencies installation for Ubuntu 16.04
-==========================================
-
 Note: If you are using Ubuntu 16.04, then you need to install g++ compiler 
 with a version equal to or higher than "5.0.0".
+
+For Ubuntu 16.04, install dependencies by this command:
 
 ```sh
 sudo apt-get install g++-5 cmake intltool libgtk2.0-dev libglade2-dev \
@@ -46,33 +31,68 @@ sudo apt-get install g++-5 cmake intltool libgtk2.0-dev libglade2-dev \
     libboost-filesystem-dev
 ```
 
-Installation for Ubuntu 16.04
-=============================
+# Getting source code
 
 ```sh
-git clone https://github.com/Xianguang-Zhou/chmsee.git
-mkdir chmsee_release_build
-cd chmsee_release_build
-CC=gcc-5 CXX=g++-5 cmake -DCMAKE_BUILD_TYPE=Release ../chmsee
-make
-sudo make install
+wget -c https://github.com/Xianguang-Zhou/chmsee/archive/master.zip
+unzip master.zip
+mv chmsee-master chmsee
 ```
 
-Development for Eclipse 3.7 and Ubuntu 16.04
-============================================
+or
+
+```sh
+git clone --depth=1 https://github.com/Xianguang-Zhou/chmsee.git
+```
+
+or
 
 ```sh
 git clone https://github.com/Xianguang-Zhou/chmsee.git
-mkdir chmsee_eclipse_build
-cd chmsee_eclipse_build
+```
+
+# Building
+
+## Creating a separate directory for building
+
+```sh
+mkdir chmsee_build
+cd chmsee_build
+```
+
+## Generating Makefile by CMake
+
+```sh
+cmake -DCMAKE_BUILD_TYPE=Release ../chmsee
+```
+
+For Ubuntu 16.04, generate Makefile by this command:
+
+```sh
+CC=gcc-5 CXX=g++-5 cmake -DCMAKE_BUILD_TYPE=Release ../chmsee
+```
+
+For Ubuntu 16.04, generate Makefile and Eclipse project files by this command:
+
+```sh
 CC=gcc-5 CXX=g++-5 cmake -G "Eclipse CDT4 - Unix Makefiles" \
     -DCMAKE_ECLIPSE_GENERATE_SOURCE_PROJECT=TRUE -DCMAKE_BUILD_TYPE=Debug \
     -DCMAKE_ECLIPSE_VERSION=3.7 ../chmsee
+```
+
+## Compiling and Linking
+
+```sh
 make
 ```
 
-Report bug
-==========
+# Installation
+
+```sh
+sudo make install
+```
+
+# Report bug
 
 If you find any problem, please file this bug in
 https://github.com/Xianguang-Zhou/chmsee/issues, thanks.
